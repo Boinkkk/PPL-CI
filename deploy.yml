@@ -1,0 +1,25 @@
+name: CI/CD - Web Mahasiswa
+
+on:
+  push:
+    branches: [ main ] 
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Validate HTML
+        uses: chabad360/html-proofer@v1.0
+        with:
+          directory: ./
+          check_html: true
+          check_css: true
+          
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./
