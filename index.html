@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data Mahasiswa</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Daftar Mahasiswa</h1>
+    <button id="btnTambah">+ Tambah Mahasiswa</button>
+
+  <table id="tabel-mahasiswa">
+    <thead>
+      <tr>
+        <th>No</th>
+        <th>NIM</th>
+        <th>Nama</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <!-- Modal Pop Up -->
+  <div id="formModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h3>Tambah Data Mahasiswa</h3>
+      <input type="text" id="nim" placeholder="Masukkan NIM"><br>
+      <input type="text" id="nama" placeholder="Masukkan Nama"><br>
+      <button id="simpanBtn">Simpan</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
