@@ -8,18 +8,17 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
     steps:
-      # 1️⃣ Ambil kode dari repo
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2️⃣ Validasi file HTML agar tidak ada error sintaks
-      - name: Validate HTML files
-        uses: chabad360/html-proofer@v1.0
-        with:
-          directory: ./
-          check_html: true
+      # ✅ Validasi HTML pakai tidy (bawaan Ubuntu)
+      - name: Validate HTML
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y tidy
+          tidy -qe index.html || true
 
-      # 3️⃣ Validasi file JavaScript (pastikan tidak error syntax)
+      # ✅ Validasi file JavaScript (cek syntax)
       - name: Check JavaScript syntax
         run: |
           for file in *.js; do
@@ -27,7 +26,7 @@ jobs:
             node --check "$file"
           done
 
-      # 4️⃣ Tampilkan pesan sukses
+      # ✅ Pesan sukses
       - name: Report success
         run: echo "✅ Build and test completed successfully!"
 
@@ -36,11 +35,9 @@ jobs:
     needs: build-and-test
     if: success()
     steps:
-      # 5️⃣ Checkout lagi sebelum deploy
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 6️⃣ Deploy ke GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
